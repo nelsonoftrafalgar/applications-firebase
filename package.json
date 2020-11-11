@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development --hot"
+    "dev": "webpack serve --mode development --hot",
+    "start": "webpack --mode development --watch"
   },
   "prettier": {
     "trailingComma": "none",
     "tabWidth": 2,
     "semi": false,
     "singleQuote": true,
-    "printWidth": 120
+    "printWidth": 100
   },
   "eslintConfig": {
     "extends": [
@@ -36,7 +37,9 @@
     "@babel/runtime": "^7.12.5",
     "babel-loader": "^8.2.1",
     "babel-plugin-styled-components": "^1.11.1",
+    "dotenv": "^8.2.0",
     "file-loader": "^6.2.0",
+    "firebase": "^8.0.1",
     "html-webpack-plugin": "^4.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
