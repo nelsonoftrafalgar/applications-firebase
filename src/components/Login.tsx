@@ -1,6 +1,25 @@
+import { Col, Row } from 'src/grid'
 import React, { useState } from 'react'
 
+import { Button } from 'src/styles/button'
+import { globalStyles } from 'src/styles/styles'
+import styled from 'styled-components'
 import { useAuth } from 'src/context/AuthProvider'
+
+const Container = styled.div`
+  width: 100%;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const FormWrapper = styled.div`
+  background: ${globalStyles.light_bg};
+  padding: 20px;
+`
 
 const Login = () => {
   const { login, logout } = useAuth()
@@ -36,14 +55,26 @@ const Login = () => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input type="email" onChange={handleEmailChange} value={email} />
-        <input type="password" onChange={handlePasswordChange} value={password} />
-        <button type="submit">Login</button>
-      </form>
-      <button onClick={handleLogout}>Logout</button>
-    </>
+    <Container>
+      <FormWrapper>
+        <form onSubmit={handleSubmit}>
+          <Row direction="column">
+            <Col size={12} mb={20}>
+              <input type="email" onChange={handleEmailChange} value={email} />
+            </Col>
+            <Col size={12} mb={20}>
+              <input type="password" onChange={handlePasswordChange} value={password} />
+            </Col>
+            <Col size={12}>
+              <Button padding={'10px 20px'} type="submit">
+                Login
+              </Button>
+            </Col>
+          </Row>
+        </form>
+        <button onClick={handleLogout}>Logout</button>
+      </FormWrapper>
+    </Container>
   )
 }
 
