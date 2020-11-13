@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import AuthProvider from 'src/context/AuthProvider'
@@ -28,7 +28,7 @@ const App = () => {
         <Container>
           <Router>
             <Switch>
-              <Login />
+              <Route path="/login" component={Login} />
             </Switch>
           </Router>
         </Container>

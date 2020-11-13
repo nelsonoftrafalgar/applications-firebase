@@ -1,7 +1,9 @@
 import { Col, Row } from 'src/grid'
-import React, { useState } from 'react'
 
 import { Button } from 'src/styles/button'
+import { Form } from 'react-final-form'
+import Input from 'src/components/Input'
+import React from 'react'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 import { useAuth } from 'src/context/AuthProvider'
@@ -16,27 +18,21 @@ const Container = styled.div`
   align-items: center;
 `
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.form`
   background: ${globalStyles.light_bg};
   padding: 20px;
+  width: 300px;
 `
+
+interface IFormState {
+  email: string
+  password: string
+}
 
 const Login = () => {
   const { login, logout } = useAuth()
-  const [email, setEmail] = useState('')
-  const [password, setPasswword] = useState('')
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value)
-  }
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPasswword(e.currentTarget.value)
-  }
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  const onSubmit = async ({ email, password }: IFormState) => {
     try {
       await login(email, password)
       console.log('login success')
@@ -56,24 +52,28 @@ const Login = () => {
 
   return (
     <Container>
-      <FormWrapper>
-        <form onSubmit={handleSubmit}>
-          <Row direction="column">
-            <Col size={12} mb={20}>
-              <input type="email" onChange={handleEmailChange} value={email} />
-            </Col>
-            <Col size={12} mb={20}>
-              <input type="password" onChange={handlePasswordChange} value={password} />
-            </Col>
-            <Col size={12}>
-              <Button padding={'10px 20px'} type="submit">
-                Login
-              </Button>
-            </Col>
-          </Row>
-        </form>
-        <button onClick={handleLogout}>Logout</button>
-      </FormWrapper>
+      <Form
+        onSubmit={onSubmit}
+        render={({ handleSubmit }) => (
+          <FormWrapper onSubmit={handleSubmit}>
+            <Row direction="column">
+              <Col size={12} mb={20}>
+                <Input type="email" name="email" />
+              </Col>
+              <Col size={12} mb={20}>
+                <Input type="password" name="password" />
+              </Col>
+              <Col size={12}>
+                <Button padding={'10px 20px'} type="submit">
+                  Login
+                </Button>
+              </Col>
+            </Row>
+          </FormWrapper>
+        )}
+      />
+
+      <button onClick={handleLogout}>Logout</button>
     </Container>
   )
 }
