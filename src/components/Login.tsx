@@ -1,12 +1,15 @@
 import { Col, Row } from 'src/grid'
+import React, { useState } from 'react'
+import { validateEmail, validatePassword } from 'src/validation/schema'
 
 import { Button } from 'src/styles/button'
+import { Error } from 'src/styles/error'
 import { Form } from 'react-final-form'
 import Input from 'src/components/Input'
-import React from 'react'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 import { useAuth } from 'src/context/AuthProvider'
+import { useHistory } from 'react-router-dom'
 
 const Container = styled.div`
   width: 100%;
@@ -31,13 +34,15 @@ interface IFormState {
 
 const Login = () => {
   const { login, logout } = useAuth()
+  const [loginError, setLoginError] = useState('')
+  const history = useHistory()
 
   const onSubmit = async ({ email, password }: IFormState) => {
     try {
       await login(email, password)
-      console.log('login success')
-    } catch {
-      console.log('login error')
+      history.push('/')
+    } catch (error) {
+      setLoginError(error.message)
     }
   }
 
@@ -54,14 +59,14 @@ const Login = () => {
     <Container>
       <Form
         onSubmit={onSubmit}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, active }) => (
           <FormWrapper onSubmit={handleSubmit}>
             <Row direction="column">
               <Col size={12} mb={20}>
-                <Input type="email" name="email" />
+                <Input type="email" name="email" validate={validateEmail} />
               </Col>
               <Col size={12} mb={20}>
-                <Input type="password" name="password" />
+                <Input type="password" name="password" validate={validatePassword} />
               </Col>
               <Col size={12}>
                 <Button padding={'10px 20px'} type="submit">
@@ -69,10 +74,10 @@ const Login = () => {
                 </Button>
               </Col>
             </Row>
+            {!active && <Error>{loginError}</Error>}
           </FormWrapper>
         )}
       />
-
       <button onClick={handleLogout}>Logout</button>
     </Container>
   )

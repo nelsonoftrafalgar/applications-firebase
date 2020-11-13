@@ -1,3 +1,4 @@
+import {Error} from 'src/styles/error'
 import React from 'react'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
@@ -8,6 +9,7 @@ const { dark_bg, light_font_color, basic_font_family } = globalStyles
 interface IProps {
   type: 'text' | 'email' | 'password'
   name: string
+  validate: (value: string) => string | undefined
 }
 
 export const StyledInput = styled.input`
@@ -21,10 +23,16 @@ export const StyledInput = styled.input`
   font-family: ${basic_font_family};
 `
 
-const Input: React.FC<IProps> = ({ type, name }) => {
-  const { input } = useField(name)
+const Input: React.FC<IProps> = ({ type, name, validate }) => {
+  const { input, meta } = useField(name, { validate })
+  const errorMessage = !meta.active && meta.submitFailed && meta.error
 
-  return <StyledInput placeholder={name} type={type} {...input} />
+  return (
+    <>
+      <StyledInput placeholder={name} type={type} {...input} />
+      <Error>{errorMessage}</Error>
+    </>
+  )
 }
 
 export default Input
