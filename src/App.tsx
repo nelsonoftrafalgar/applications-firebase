@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import AuthProvider from 'src/context/AuthProvider'
+import Layout from 'src/layout/Layout'
 import Login from 'src/components/Login'
 import React from 'react'
 import { globalStyles } from 'src/styles/styles'
@@ -28,6 +29,9 @@ const App = () => {
         <Container>
           <Router>
             <Switch>
+              <Layout>
+                <Route exact={true} path="/" />
+              </Layout>
               <Route path="/login" component={Login} />
             </Switch>
           </Router>
