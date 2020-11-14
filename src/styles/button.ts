@@ -18,4 +18,8 @@ export const Button = styled('button')<IButton>`
   cursor: pointer;
   ${({padding}) => `padding: ${padding};`}
   ${({margin}) => `margin: ${margin};`}
+
+  &:disabled {
+    cursor: auto;
+  }
 `

@@ -6,6 +6,7 @@ import { Button } from 'src/styles/button'
 import { Error } from 'src/styles/error'
 import { Form } from 'react-final-form'
 import Input from 'src/components/Input'
+import { Loader } from 'src/styles/loader'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 import { useAuth } from 'src/context/AuthProvider'
@@ -35,14 +36,18 @@ interface IFormState {
 const Login = () => {
   const { login, logout } = useAuth()
   const [loginError, setLoginError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
 
   const onSubmit = async ({ email, password }: IFormState) => {
+    setIsLoading(true)
     try {
       await login(email, password)
+      setIsLoading(false)
       history.push('/')
     } catch (error) {
       setLoginError(error.message)
+      setIsLoading(false)
     }
   }
 
@@ -69,8 +74,8 @@ const Login = () => {
                 <Input type="password" name="password" validate={validatePassword} />
               </Col>
               <Col size={12}>
-                <Button padding={'10px 20px'} type="submit">
-                  Login
+                <Button padding={'10px 20px'} type="submit" disabled={isLoading}>
+                  {isLoading ? <Loader /> : 'Login'}
                 </Button>
               </Col>
             </Row>
