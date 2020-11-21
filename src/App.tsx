@@ -5,6 +5,7 @@ import AuthProvider from 'src/context/AuthProvider'
 import Layout from 'src/layout/Layout'
 import Login from 'src/components/Login'
 import React from 'react'
+import Search from 'src/pages/Search'
 import { globalStyles } from 'src/styles/styles'
 
 const Container = styled.div`
@@ -29,10 +30,11 @@ const App = () => {
         <Container>
           <Router>
             <Switch>
+              <Route path='/login' component={Login} />
               <Layout>
-                <Route exact={true} path="/" />
+                <Route exact={true} path='/' />
+                <Route path='/search' component={Search}/>
               </Layout>
-              <Route path="/login" component={Login} />
             </Switch>
           </Router>
         </Container>

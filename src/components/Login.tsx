@@ -34,7 +34,7 @@ interface IFormState {
 }
 
 const Login = () => {
-  const { login, logout } = useAuth()
+  const { login } = useAuth()
   const [loginError, setLoginError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
@@ -48,15 +48,6 @@ const Login = () => {
     } catch (error) {
       setLoginError(error.message)
       setIsLoading(false)
-    }
-  }
-
-  const handleLogout = async () => {
-    try {
-      await logout()
-      console.log('logout success')
-    } catch {
-      console.log('logout error')
     }
   }
 
@@ -83,7 +74,6 @@ const Login = () => {
           </FormWrapper>
         )}
       />
-      <button onClick={handleLogout}>Logout</button>
     </Container>
   )
 }

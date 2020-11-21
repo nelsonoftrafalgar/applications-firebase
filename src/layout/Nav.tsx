@@ -1,10 +1,12 @@
+import { Button, StyledLink } from 'src/styles'
+
 import { INavContext } from 'src/models/nav'
 import NavItem from 'src/layout/NavItem'
 import React from 'react'
-import { StyledLink } from 'src/styles'
 import { globalStyles } from 'src/styles/styles'
 import { navigation } from 'src/data/navigation'
 import styled from 'styled-components'
+import { useAuth } from 'src/context/AuthProvider'
 import { useNavState } from 'src/hooks/useNavState'
 
 const { light_bg, basic_font_family, basic_font_color } = globalStyles
@@ -28,7 +30,12 @@ const Logo = styled.h1`
 export const NavContext = React.createContext({} as INavContext)
 
 const Nav = () => {
+  const { logout } = useAuth()
   const { activeNavState, handleSetActiveItem } = useNavState()
+
+  const handleLogout = async () => {
+    await logout()
+  }
 
   return (
     <NavContext.Provider value={{ activeNavState, handleSetActiveItem }}>
@@ -41,6 +48,7 @@ const Nav = () => {
         {navigation.map((item) => (
           <NavItem key={item.name} {...item} />
         ))}
+        <Button margin={'auto 0 0'} padding={'10px 20px'} onClick={handleLogout}>Logout</Button>
       </Container>
     </NavContext.Provider>
   )
