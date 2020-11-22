@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import AuthProvider from 'src/context/AuthProvider'
+import Bad from 'src/pages/Bad'
 import Layout from 'src/layout/Layout'
 import Login from 'src/components/Login'
 import React from 'react'
@@ -34,6 +35,7 @@ const App = () => {
               <Layout>
                 <Route exact={true} path='/' />
                 <Route path='/search' component={Search}/>
+                <Route path='/bad' component={Bad}/>
               </Layout>
             </Switch>
           </Router>
