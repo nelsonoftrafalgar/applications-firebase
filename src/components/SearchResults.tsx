@@ -1,12 +1,14 @@
 import { ISearchResult, ISearchResultIem } from 'src/models/search'
 
+import DeleteModal from 'src/components/DeleteModal'
 import EditModal from 'src/components/EditModal'
 import React from 'react'
 import { TableHead } from 'src/components/TableHead'
-import { TableRow } from './TableRow'
+import { TableRow } from 'src/components/TableRow'
 import { Td } from 'src/styles'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
+import { useDeleteModal } from 'src/hooks/useDeleteModal'
 import { useEditModal } from 'src/hooks/useEditModal'
 
 const { light_bg } = globalStyles
@@ -38,6 +40,7 @@ interface ISearchResultProps {
 
 const SearchResults: React.FC<ISearchResultProps> = ({ searchResult }) => {
   const { editModalState, handleToggleEditModal } = useEditModal(searchResult)
+  const { deleteModalState, handleToggleDeleteModal } = useDeleteModal()
 
   const renderResults = searchResult
     ? Object.entries(searchResult).map((result) => {
@@ -46,7 +49,15 @@ const SearchResults: React.FC<ISearchResultProps> = ({ searchResult }) => {
           keyof ISearchResultIem
         >
         const data = keys.map((key) => <Td key={id + key}>{values[key]}</Td>)
-        return <TableRow handleOpenEditModal={handleToggleEditModal} id={id} key={id} data={data} />
+        return (
+          <TableRow
+            handleToggleDeleteModal={handleToggleDeleteModal}
+            handleToggleEditModal={handleToggleEditModal}
+            id={id}
+            key={id}
+            data={data}
+          />
+        )
       })
     : null
 
@@ -60,6 +71,9 @@ const SearchResults: React.FC<ISearchResultProps> = ({ searchResult }) => {
       </Container>
       {editModalState?.isOpen && (
         <EditModal handleToggleEditModal={handleToggleEditModal} editModalState={editModalState} />
+      )}
+      {deleteModalState?.isOpen && (
+        <DeleteModal handleToggleDeleteModal={handleToggleDeleteModal} id={deleteModalState.id} />
       )}
     </>
   )

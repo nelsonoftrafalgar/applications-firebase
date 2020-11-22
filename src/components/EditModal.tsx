@@ -1,51 +1,27 @@
+import { Background, CloseButton } from 'src/styles/modal'
 import { Button, Title } from 'src/styles'
 import { Col, Row } from 'src/grid'
+import { ISearchResult, ISearchResultIem } from 'src/models/search'
 import React, { useState } from 'react'
 import { validateDate, validateSalary, validateSearch } from 'src/validation/schema'
 
 import { Form } from 'react-final-form'
 import { IEditModalState } from 'src/hooks/useEditModal'
-import { ISearchResultIem } from 'src/models/search'
 import Input from 'src/components/Input'
 import { Loader } from 'src/styles/loader'
 import { database } from 'src/firebase'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 
-const { light_bg, basic_font_color } = globalStyles
-
-const Background = styled.div`
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
 const FormWrapper = styled.form`
   width: 500px;
-  background: ${light_bg};
+  background: ${globalStyles.light_bg};
   padding: 20px;
-`
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 50px;
-  right: 80px;
-  background: transparent;
-  color: ${basic_font_color};
-  font-size: 25px;
-  cursor: pointer;
 `
 
 interface IEditModal {
   editModalState: IEditModalState
-  handleToggleEditModal: (id: string, isOpen: boolean) => () => void
+  handleToggleEditModal: (id: keyof ISearchResult, isOpen: boolean) => () => void
 }
 
 const EditModal: React.FC<IEditModal> = ({ editModalState, handleToggleEditModal }) => {
@@ -78,7 +54,7 @@ const EditModal: React.FC<IEditModal> = ({ editModalState, handleToggleEditModal
                 </Title>
                 <CloseButton
                   type="button"
-                  onClick={handleToggleEditModal(editModalState.id as string, false)}
+                  onClick={handleToggleEditModal(editModalState.id, false)}
                 >
                   &#10006;
                 </CloseButton>

@@ -6,16 +6,22 @@ import React from 'react'
 interface ITableRow {
   id: keyof ISearchResult
   data: JSX.Element[]
-  handleOpenEditModal?: (id: keyof ISearchResult, isOpen: boolean) => () => void
+  handleToggleEditModal?: (id: keyof ISearchResult, isOpen: boolean) => () => void
+  handleToggleDeleteModal?: (id: keyof ISearchResult, isOpen: boolean) => () => void
 }
 
-const TableRow: React.FC<ITableRow> = ({ handleOpenEditModal, id, data }) => {
+const TableRow: React.FC<ITableRow> = ({ handleToggleDeleteModal, handleToggleEditModal, id, data }) => {
   return (
     <tr>
       {data}
-      {handleOpenEditModal && (
+      {handleToggleEditModal && (
         <Td>
-          <Button onClick={handleOpenEditModal(id, true)}>Edit</Button>
+          <Button onClick={handleToggleEditModal(id, true)}>Edit</Button>
+        </Td>
+      )}
+      {handleToggleDeleteModal && (
+        <Td>
+          <Button onClick={handleToggleDeleteModal(id, true)}>Delete</Button>
         </Td>
       )}
     </tr>
