@@ -1,7 +1,8 @@
 import { ISearchResult, ISearchResultIem } from 'src/models/search'
 
-import DeleteModal from 'src/components/DeleteModal'
-import EditModal from 'src/components/EditModal'
+import Delete from 'src/components/Delete'
+import EditForm from 'src/components/EditForm'
+import Modal from 'src/components/Modal'
 import React from 'react'
 import { TableHead } from 'src/components/TableHead'
 import { TableRow } from 'src/components/TableRow'
@@ -9,7 +10,7 @@ import { Td } from 'src/styles'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 import { useDeleteModal } from 'src/hooks/useDeleteModal'
-import { useEditModal } from 'src/hooks/useEditModal'
+import { useEditFormModal } from 'src/hooks/useEditFormModal'
 
 const { light_bg } = globalStyles
 
@@ -39,7 +40,7 @@ interface ISearchResultProps {
 }
 
 const SearchResults: React.FC<ISearchResultProps> = ({ searchResult }) => {
-  const { editModalState, handleToggleEditModal } = useEditModal(searchResult)
+  const { editFormModalState, handleToggleEditFormModal } = useEditFormModal(searchResult)
   const { deleteModalState, handleToggleDeleteModal } = useDeleteModal()
 
   const renderResults = searchResult
@@ -52,7 +53,7 @@ const SearchResults: React.FC<ISearchResultProps> = ({ searchResult }) => {
         return (
           <TableRow
             handleToggleDeleteModal={handleToggleDeleteModal}
-            handleToggleEditModal={handleToggleEditModal}
+            handleToggleEditFormModal={handleToggleEditFormModal}
             id={id}
             key={id}
             data={data}
@@ -69,11 +70,15 @@ const SearchResults: React.FC<ISearchResultProps> = ({ searchResult }) => {
           <tbody>{renderResults}</tbody>
         </Table>
       </Container>
-      {editModalState?.isOpen && (
-        <EditModal handleToggleEditModal={handleToggleEditModal} editModalState={editModalState} />
+      {editFormModalState?.isOpen && (
+        <Modal onClose={handleToggleEditFormModal(editFormModalState.id, false)}>
+          <EditForm editFormState={editFormModalState} />
+        </Modal>
       )}
       {deleteModalState?.isOpen && (
-        <DeleteModal handleToggleDeleteModal={handleToggleDeleteModal} id={deleteModalState.id} />
+        <Modal onClose={handleToggleDeleteModal(deleteModalState.id, false)}>
+          <Delete table='applications' id={deleteModalState.id} />
+        </Modal>
       )}
     </>
   )

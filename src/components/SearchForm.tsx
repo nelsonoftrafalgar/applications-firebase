@@ -7,7 +7,7 @@ import { Form } from 'react-final-form'
 import { ISearchValue } from 'src/models/search'
 import Input from 'src/components/Input'
 import { Loader } from 'src/styles/loader'
-import Select from './Select'
+import Select from 'src/components/Select'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 

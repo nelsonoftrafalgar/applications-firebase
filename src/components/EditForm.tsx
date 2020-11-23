@@ -1,33 +1,32 @@
-import { Background, CloseButton } from 'src/styles/modal'
-import { Button, Title } from 'src/styles'
+import {Button, Title} from 'src/styles'
 import { Col, Row } from 'src/grid'
-import { ISearchResult, ISearchResultIem } from 'src/models/search'
 import React, { useState } from 'react'
 import { validateDate, validateSalary, validateSearch } from 'src/validation/schema'
 
 import { Form } from 'react-final-form'
-import { IEditModalState } from 'src/hooks/useEditModal'
+import { IEditFormModalState } from 'src/hooks/useEditFormModal'
+import { ISearchResultIem } from 'src/models/search'
 import Input from 'src/components/Input'
 import { Loader } from 'src/styles/loader'
+import { ResultKey } from 'src/models/main'
 import { database } from 'src/firebase'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 
+interface IProps {
+  editFormState: IEditFormModalState
+}
+
 const FormWrapper = styled.form`
-  width: 500px;
+  width: 300px;
   background: ${globalStyles.light_bg};
   padding: 20px;
 `
 
-interface IEditModal {
-  editModalState: IEditModalState
-  handleToggleEditModal: (id: keyof ISearchResult, isOpen: boolean) => () => void
-}
-
-const EditModal: React.FC<IEditModal> = ({ editModalState, handleToggleEditModal }) => {
+const EditForm: React.FC<IProps> = ({editFormState}) => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const update = (key: string, values: ISearchResultIem) => {
+  const update = (key: ResultKey, values: ISearchResultIem) => {
     const updatedEntry = {
       [`applications/${key}`]: { ...values }
     }
@@ -37,14 +36,13 @@ const EditModal: React.FC<IEditModal> = ({ editModalState, handleToggleEditModal
 
   const onSubmit = (values: ISearchResultIem) => {
     setIsLoading(true)
-    update(editModalState.id as string, values)
+    update(editFormState.id, values)
   }
 
   return (
-    <Background>
-      <Form
+    <Form
         onSubmit={onSubmit}
-        initialValues={{ ...editModalState.item }}
+        initialValues={{ ...editFormState.item }}
         render={({ handleSubmit }) => (
           <FormWrapper onSubmit={handleSubmit}>
             <Row direction="column">
@@ -52,12 +50,6 @@ const EditModal: React.FC<IEditModal> = ({ editModalState, handleToggleEditModal
                 <Title text_align={'center'} margin={'0 0 20px 0'}>
                   Edit
                 </Title>
-                <CloseButton
-                  type="button"
-                  onClick={handleToggleEditModal(editModalState.id, false)}
-                >
-                  &#10006;
-                </CloseButton>
               </Col>
               <Col size={12} mb={20}>
                 <Input
@@ -106,8 +98,7 @@ const EditModal: React.FC<IEditModal> = ({ editModalState, handleToggleEditModal
           </FormWrapper>
         )}
       />
-    </Background>
   )
 }
 
-export default EditModal
+export default EditForm

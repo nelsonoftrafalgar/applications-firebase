@@ -1,15 +1,15 @@
-import { ISearchResult } from 'src/models/search'
+import { ResultKey } from 'src/models/main'
 import { useState } from 'react'
 
-export interface IDeleteModalState {
+interface IState {
   isOpen: boolean
-  id: keyof ISearchResult
+  id: ResultKey
 }
-
 export const useDeleteModal = () => {
-  const [deleteModalState, setDeleteModalState] = useState<IDeleteModalState | null>(null)
 
-  const handleToggleDeleteModal = (id: keyof ISearchResult, isOpen: boolean) => () => {
+  const [deleteModalState, setDeleteModalState] = useState<IState | null>(null)
+
+  const handleToggleDeleteModal = (id: ResultKey, isOpen: boolean) => () => {
     setDeleteModalState({id, isOpen})
   }
 

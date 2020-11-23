@@ -1,22 +1,22 @@
 import { Button, Td } from 'src/styles'
 
-import { ISearchResult } from 'src/models/search'
 import React from 'react'
+import { ResultKey } from 'src/models/main'
 
 interface ITableRow {
-  id: keyof ISearchResult
+  id: ResultKey
   data: JSX.Element[]
-  handleToggleEditModal?: (id: keyof ISearchResult, isOpen: boolean) => () => void
-  handleToggleDeleteModal?: (id: keyof ISearchResult, isOpen: boolean) => () => void
+  handleToggleEditFormModal?: (id: ResultKey, isOpen: boolean) => () => void
+  handleToggleDeleteModal?: (id: ResultKey, isOpen: boolean) => () => void
 }
 
-const TableRow: React.FC<ITableRow> = ({ handleToggleDeleteModal, handleToggleEditModal, id, data }) => {
+const TableRow: React.FC<ITableRow> = ({ handleToggleDeleteModal, handleToggleEditFormModal, id, data }) => {
   return (
     <tr>
       {data}
-      {handleToggleEditModal && (
+      {handleToggleEditFormModal && (
         <Td>
-          <Button onClick={handleToggleEditModal(id, true)}>Edit</Button>
+          <Button onClick={handleToggleEditFormModal(id, true)}>Edit</Button>
         </Td>
       )}
       {handleToggleDeleteModal && (
