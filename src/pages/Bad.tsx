@@ -1,7 +1,7 @@
 import { Col, Row } from 'src/grid'
 import { Section, Title } from 'src/styles'
 
-import BadForm from 'src/components/BadForm'
+import BadForm from 'src/forms/BadForm'
 import BadResults from 'src/components/BadResults'
 import React from 'react'
 

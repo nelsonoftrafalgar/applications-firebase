@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
+import Add from 'src/pages/Add'
 import AuthProvider from 'src/context/AuthProvider'
 import Bad from 'src/pages/Bad'
 import Layout from 'src/layout/Layout'
@@ -31,11 +32,12 @@ const App = () => {
         <Container>
           <Router>
             <Switch>
-              <Route path='/login' component={Login} />
+              <Route path="/login" component={Login} />
               <Layout>
-                <Route exact={true} path='/' />
-                <Route path='/search' component={Search}/>
-                <Route path='/bad' component={Bad}/>
+                <Route exact={true} path="/" />
+                <Route path="/search" component={Search} />
+                <Route path="/bad" component={Bad} />
+                <Route path="/add" component={Add} />
               </Layout>
             </Switch>
           </Router>

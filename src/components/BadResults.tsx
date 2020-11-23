@@ -2,7 +2,7 @@ import { IBadFormItem, IBadResult } from 'src/models/bad'
 import React, { useEffect, useState } from 'react'
 
 import Delete from 'src/components/Delete'
-import EditBadForm from 'src/components/EditBadForm'
+import EditBadForm from 'src/forms/EditBadForm'
 import Modal from 'src/components/Modal'
 import { TableHead } from 'src/components/TableHead'
 import { TableRow } from 'src/components/TableRow'

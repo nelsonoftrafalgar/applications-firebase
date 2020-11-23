@@ -1,7 +1,7 @@
 import { ISearchResult, ISearchResultIem } from 'src/models/search'
 
 import Delete from 'src/components/Delete'
-import EditForm from 'src/components/EditForm'
+import EditForm from 'src/forms/EditForm'
 import Modal from 'src/components/Modal'
 import React from 'react'
 import { TableHead } from 'src/components/TableHead'
