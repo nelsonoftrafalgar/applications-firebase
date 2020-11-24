@@ -5,7 +5,7 @@ import { validateDate, validateSalary, validateSearch } from 'src/validation/sch
 
 import { Form } from 'react-final-form'
 import { IEditFormModalState } from 'src/hooks/useEditFormModal'
-import { ISearchResultIem } from 'src/models/search'
+import { ISearchResultItem } from 'src/models/search'
 import Input from 'src/components/Input'
 import { Loader } from 'src/styles/loader'
 import { ResultKey } from 'src/models/main'
@@ -26,7 +26,7 @@ const FormWrapper = styled.form`
 const EditForm: React.FC<IProps> = ({ editFormState }) => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const update = (key: ResultKey, values: ISearchResultIem) => {
+  const update = (key: ResultKey, values: ISearchResultItem) => {
     const updatedEntry = {
       [`applications/${key}`]: { ...values }
     }
@@ -34,7 +34,7 @@ const EditForm: React.FC<IProps> = ({ editFormState }) => {
     database.ref().update(updatedEntry, () => setIsLoading(false))
   }
 
-  const onSubmit = (values: ISearchResultIem) => {
+  const onSubmit = (values: ISearchResultItem) => {
     setIsLoading(true)
     update(editFormState.id, values)
   }

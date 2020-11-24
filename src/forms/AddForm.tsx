@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { validateDate, validateSalary, validateSearch } from 'src/validation/schema'
 
 import { Form } from 'react-final-form'
-import { ISearchResultIem } from 'src/models/search'
+import { ISearchResultItem } from 'src/models/search'
 import Input from 'src/components/Input'
 import { Loader } from 'src/styles/loader'
 import { database } from 'src/firebase'
@@ -20,7 +20,7 @@ const FormWrapper = styled.form`
 const AddForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const onSubmit = (values: ISearchResultIem) => {
+  const onSubmit = (values: ISearchResultItem) => {
     setIsLoading(true)
     database.ref('applications').push(values, () => setIsLoading(false))
   }

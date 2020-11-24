@@ -1,4 +1,4 @@
-import { ISearchResult, ISearchResultIem } from 'src/models/search'
+import { ISearchResult, ISearchResultItem } from 'src/models/search'
 
 import Delete from 'src/components/Delete'
 import EditForm from 'src/forms/EditForm'
@@ -47,7 +47,7 @@ const SearchResults: React.FC<ISearchResultProps> = ({ searchResult }) => {
     ? Object.entries(searchResult).map((result) => {
         const [id, values] = result
         const keys = Object.keys(values).filter((key) => key !== 'id') as Array<
-          keyof ISearchResultIem
+          keyof ISearchResultItem
         >
         const data = keys.map((key) => <Td key={id + key}>{values[key]}</Td>)
         return (

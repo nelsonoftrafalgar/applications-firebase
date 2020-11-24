@@ -1,5 +1,5 @@
 import { IBadFormItem, IBadResult } from 'src/models/bad'
-import { ISearchResult, ISearchResultIem } from 'src/models/search'
+import { ISearchResult, ISearchResultItem } from 'src/models/search'
 
 import { ResultKey } from 'src/models/main'
 import { useState } from 'react'
@@ -7,7 +7,7 @@ import { useState } from 'react'
 export interface IEditFormModalState {
   isOpen: boolean
   id: ResultKey
-  item: ISearchResultIem | IBadFormItem
+  item: ISearchResultItem | IBadFormItem
 }
 
 export const useEditFormModal = (searchResult: ISearchResult | IBadResult | null) => {

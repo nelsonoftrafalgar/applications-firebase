@@ -3,7 +3,7 @@ export interface ISearchValue {
   select: string
 }
 
-export interface ISearchResultIem {
+export interface ISearchResultItem {
   id: number
   company_name: string
   position_name: string
@@ -14,5 +14,5 @@ export interface ISearchResultIem {
 }
 
 export interface ISearchResult {
-  [key: string]: ISearchResultIem
+  [key: string]: ISearchResultItem
 }

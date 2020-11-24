@@ -6,8 +6,11 @@ import AuthProvider from 'src/context/AuthProvider'
 import Bad from 'src/pages/Bad'
 import Layout from 'src/layout/Layout'
 import Login from 'src/components/Login'
+import Position from 'src/components/Position'
 import React from 'react'
+import Result from 'src/components/Result'
 import Search from 'src/pages/Search'
+import StatisticsProvider from 'src/context/StatisticsProvider'
 import { globalStyles } from 'src/styles/styles'
 
 const Container = styled.div`
@@ -38,6 +41,10 @@ const App = () => {
                 <Route path="/search" component={Search} />
                 <Route path="/bad" component={Bad} />
                 <Route path="/add" component={Add} />
+                <StatisticsProvider>
+                  <Route path="/statistics/position" component={Position} />
+                  <Route path='/statistics/result' component={Result}/>
+                </StatisticsProvider>
               </Layout>
             </Switch>
           </Router>
