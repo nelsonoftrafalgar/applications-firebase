@@ -1,13 +1,13 @@
 import {
-  Bar,
-  BarChart,
   CartesianGrid,
+  Line,
+  LineChart,
   Tooltip,
   XAxis,
   YAxis
 } from 'recharts'
 
-import { IBarChartWidgetData } from 'src/models/statistiscs'
+import { ILineChartWidgetData } from 'src/models/statistiscs'
 import React from 'react'
 import { globalStyles } from 'src/styles/styles'
 
@@ -16,28 +16,28 @@ const style = {background: `${dark_bg}`, color: `${light_font_color}`, border: '
 const margin = {top: 5, right: 30, left: 10, bottom: 5}
 
 interface IProps {
-  data: IBarChartWidgetData[]
   parentWidth: number
   color: string
+  data: ILineChartWidgetData[]
 }
 
-const BarChartComponent: React.FC<IProps> = ({data, color, parentWidth}) => {
+const LineChartComponent: React.FC<IProps> = ({parentWidth, color, data}) => {
   const WIDTH = parentWidth - margin.left - margin.right
 
   return (
-    <BarChart
+    <LineChart
       width={WIDTH}
       height={300}
       data={data}
       margin={margin}
     >
-      <CartesianGrid stroke={light_font_color} vertical={false} strokeDasharray='5' />
-      <XAxis dataKey='salary' stroke={light_font_color}/>
+      <CartesianGrid stroke={light_font_color} strokeDasharray='5' />
+      <XAxis interval={50} dataKey='date' stroke={light_font_color}/>
       <YAxis stroke={light_font_color}/>
-      <Tooltip contentStyle={style} cursor={false}/>
-      <Bar dataKey='quantity' fill={color} />
-    </BarChart>
+      <Tooltip contentStyle={style}/>
+      <Line type='monotone' dataKey='quantity' stroke={color} dot={false} activeDot={{ r: 5 }} />
+    </LineChart>
   )
 }
 
-export {BarChartComponent}
+export {LineChartComponent}

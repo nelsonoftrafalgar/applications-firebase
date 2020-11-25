@@ -18,6 +18,11 @@ export interface IPercentWidgetData {
 }
 
 export interface IBarChartWidgetData {
-  name: number
-  value: number
+  salary: number
+  quantity: number
+}
+
+export interface ILineChartWidgetData {
+  date: string
+  quantity: number
 }

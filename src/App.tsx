@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import Add from 'src/pages/Add'
 import AuthProvider from 'src/context/AuthProvider'
 import Bad from 'src/pages/Bad'
+import Date from 'src/pages/Date'
 import Layout from 'src/layout/Layout'
 import Login from 'src/components/Login'
 import Position from 'src/pages/Position'
@@ -46,6 +47,7 @@ const App = () => {
                   <Route path="/statistics/position" component={Position} />
                   <Route path='/statistics/result' component={Result}/>
                   <Route path='/statistics/salary' component={Salary}/>
+                  <Route path='/statistics/date' component={Date}/>
                 </StatisticsProvider>
               </Layout>
             </Switch>
