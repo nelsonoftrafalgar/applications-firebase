@@ -13,6 +13,11 @@ export interface IStatistics {
 }
 
 export interface IPercentWidgetData {
-  name: keyof IStatisticsItem
+  name: string
+  value: number
+}
+
+export interface IBarChartWidgetData {
+  name: number
   value: number
 }

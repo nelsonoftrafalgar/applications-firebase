@@ -1,8 +1,8 @@
 import { IPercentWidgetData, IStatistics, IStatisticsItem } from 'src/models/statistiscs'
 
 export const getPercentWidgetData = (statistics: IStatistics, key: keyof IStatisticsItem) => {
-  return Object.keys(statistics).reduce<IPercentWidgetData[]>((acc, item) => {
-    const statisticsKey = statistics[item][key] as keyof IStatisticsItem
+  return Object.keys(statistics).reduce((acc: IPercentWidgetData[], item: string) => {
+    const statisticsKey = statistics[item][key] as string
     const foundItem = acc.find((item) => item.name === statisticsKey)
 
     if (foundItem) {
