@@ -32,7 +32,7 @@ const LineChartComponent: React.FC<IProps> = ({parentWidth, color, data}) => {
       margin={margin}
     >
       <CartesianGrid stroke={light_font_color} strokeDasharray='5' />
-      <XAxis interval={50} dataKey='date' stroke={light_font_color}/>
+      <XAxis interval={Math.round(data.length / 10)} dataKey='date' stroke={light_font_color}/>
       <YAxis stroke={light_font_color}/>
       <Tooltip contentStyle={style}/>
       <Line type='monotone' dataKey='quantity' stroke={color} dot={false} activeDot={{ r: 5 }} />

@@ -11,6 +11,7 @@ export const datePickerTheme = {
     datepickerBackground: globalStyles.dark_bg,
     inputBackground: globalStyles.dark_bg,
     inputLabelBorder: 'none',
+    inputPadding: '0 30px',
     monthLabelColor: globalStyles.light_font_color,
     navButtonBackground: globalStyles.light_bg,
     navButtonBorder: 'none',
