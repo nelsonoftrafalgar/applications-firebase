@@ -1,4 +1,11 @@
-import { ILineChartWidgetData, IStatistics, IStatisticsItem } from 'src/models/statistiscs'
+import {
+  IDatePickerAction,
+  IDatePickerState,
+  IDatesRange,
+  ILineChartWidgetData,
+  IStatistics,
+  IStatisticsItem
+} from 'src/models/statistiscs'
 
 export const getLineChartWidgetData = (statistics: IStatistics, key: keyof IStatisticsItem) => {
   return Object.keys(statistics).reduce((acc: ILineChartWidgetData[], item: string) => {
@@ -16,10 +23,8 @@ export const getLineChartWidgetData = (statistics: IStatistics, key: keyof IStat
   }, [])
 }
 
-export const getDatesRange = () => {
+export const getDatesRange = ({ startDate, endDate }: IDatesRange) => {
   let dates: ILineChartWidgetData[] = []
-  const startDate = new Date('2018-05-11')
-  const endDate = new Date()
   while (startDate < endDate) {
     const dateData = {
       date: startDate.toISOString().slice(2, 10).split('-').reverse().join('-'),
@@ -37,4 +42,34 @@ export const getDateChartData = (range: ILineChartWidgetData[], values: ILineCha
     item.quantity = dateMatch ? dateMatch.quantity : item.quantity
     return item
   })
+}
+
+export const parseDate = (startDate: Date | null, endDate: Date | null) => {
+  if (startDate && endDate) {
+    return {
+      startDate: new Date(
+        `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`
+      ),
+      endDate: new Date(`${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`)
+    }
+  } else {
+    return {
+      startDate: new Date('2018-05-11'),
+      endDate: new Date()
+    }
+  }
+}
+
+export const datePickerReducer = (
+  state: IDatePickerState,
+  action: IDatePickerAction
+): IDatePickerState => {
+  switch (action.type) {
+    case 'FOCUS_CHANGE':
+      return { ...state, focusedInput: action.payload }
+    case 'DATE_CHANGE':
+      return action.payload
+    default:
+      return state
+  }
 }

@@ -2,12 +2,13 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import Add from 'src/pages/Add'
+import ApplicationDate from 'src/pages/Date'
 import AuthProvider from 'src/context/AuthProvider'
 import Bad from 'src/pages/Bad'
-import Date from 'src/pages/Date'
 import Layout from 'src/layout/Layout'
 import Login from 'src/components/Login'
 import Position from 'src/pages/Position'
+import PrivateRoute from 'src/components/PrivateRoute'
 import React from 'react'
 import Result from 'src/pages/Result'
 import Salary from 'src/pages/Salary'
@@ -39,15 +40,15 @@ const App = () => {
             <Switch>
               <Route path="/login" component={Login} />
               <Layout>
-                <Route exact={true} path="/" />
-                <Route path="/search" component={Search} />
-                <Route path="/bad" component={Bad} />
-                <Route path="/add" component={Add} />
+                <PrivateRoute path="/" />
+                <PrivateRoute path="/search" component={Search} />
+                <PrivateRoute path="/bad" component={Bad} />
+                <PrivateRoute path="/add" component={Add} />
                 <StatisticsProvider>
-                  <Route path="/statistics/position" component={Position} />
-                  <Route path='/statistics/result' component={Result}/>
-                  <Route path='/statistics/salary' component={Salary}/>
-                  <Route path='/statistics/date' component={Date}/>
+                  <PrivateRoute path="/statistics/position" component={Position} />
+                  <PrivateRoute path='/statistics/result' component={Result}/>
+                  <PrivateRoute path='/statistics/salary' component={Salary}/>
+                  <PrivateRoute path='/statistics/date' component={ApplicationDate}/>
                 </StatisticsProvider>
               </Layout>
             </Switch>

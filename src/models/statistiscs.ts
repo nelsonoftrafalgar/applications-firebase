@@ -1,3 +1,5 @@
+import { FocusedInput } from '@datepicker-react/styled'
+
 export interface IStatisticsItem {
   id: number
   company_name: string
@@ -26,3 +28,24 @@ export interface ILineChartWidgetData {
   date: string
   quantity: number
 }
+
+export interface IDatesRange {
+  startDate: Date
+  endDate: Date
+}
+
+export interface IDatePickerState {
+  startDate: Date | null
+  endDate: Date | null
+  focusedInput: FocusedInput
+}
+
+export type IDatePickerAction =
+  | {
+      type: 'DATE_CHANGE'
+      payload: IDatePickerState
+    }
+  | {
+      type: 'FOCUS_CHANGE'
+      payload: FocusedInput
+    }

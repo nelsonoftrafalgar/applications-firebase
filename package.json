@@ -35,6 +35,7 @@
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.12.1",
     "@babel/runtime": "^7.12.5",
+    "@datepicker-react/styled": "^2.7.0",
     "babel-loader": "^8.2.1",
     "babel-plugin-styled-components": "^1.11.1",
     "dotenv": "^8.2.0",
