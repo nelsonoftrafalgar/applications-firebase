@@ -4,7 +4,6 @@ export interface ISearchValue {
 }
 
 export interface ISearchResultItem {
-  id: number
   company_name: string
   position_name: string
   salary_min: number

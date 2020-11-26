@@ -1,7 +1,6 @@
 import { FocusedInput } from '@datepicker-react/styled'
 
 export interface IStatisticsItem {
-  id: number
   company_name: string
   position_name: string
   salary_min: number

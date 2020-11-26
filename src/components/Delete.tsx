@@ -2,9 +2,8 @@ import { Button, Title } from 'src/styles'
 import { Col, Row } from 'src/grid'
 import React, { useState } from 'react'
 
-import { IBadResult } from 'src/models/bad'
-import { ISearchResult } from 'src/models/search'
 import { Loader } from 'src/styles/loader'
+import { ResultKey } from 'src/models/main'
 import { globalStyles } from 'src/styles/styles'
 import { query } from 'src/services/query'
 import styled from 'styled-components'
@@ -17,7 +16,7 @@ const Container = styled.div`
 type TableType = 'applications' | 'bad_companies'
 
 interface IProps {
-  id: keyof ISearchResult | keyof IBadResult
+  id: ResultKey
   table: TableType
 }
 
