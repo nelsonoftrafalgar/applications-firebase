@@ -7,8 +7,8 @@ import Modal from 'src/components/Modal'
 import { TableHead } from 'src/components/TableHead'
 import { TableRow } from 'src/components/TableRow'
 import { Td } from 'src/styles'
-import { database } from 'src/firebase'
 import { globalStyles } from 'src/styles/styles'
+import { query } from 'src/services/query'
 import styled from 'styled-components'
 import { useDeleteModal } from 'src/hooks/useDeleteModal'
 import { useEditFormModal } from 'src/hooks/useEditFormModal'
@@ -35,9 +35,7 @@ const BadResults = () => {
   const { editFormModalState, handleToggleEditFormModal } = useEditFormModal(results)
 
   useEffect(() => {
-    database
-      .ref('bad_companies')
-      .on('value', (snap) => setResults(snap.toJSON() as IBadResult | null))
+    query.readAll('bad_companies', setResults)
   }, [])
 
   const renderBadResults = results

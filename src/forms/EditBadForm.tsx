@@ -8,8 +8,8 @@ import { ISearchResultItem } from 'src/models/search'
 import Input from 'src/components/Input'
 import { Loader } from 'src/styles/loader'
 import { ResultKey } from 'src/models/main'
-import { database } from 'src/firebase'
 import { globalStyles } from 'src/styles/styles'
+import { query } from 'src/services/query'
 import styled from 'styled-components'
 import { validateSearch } from 'src/validation/schema'
 
@@ -31,7 +31,7 @@ const EditBadForm: React.FC<IProps> = ({ editFormState }) => {
       [`bad_companies/${key}`]: { ...values }
     }
 
-    database.ref().update(updatedEntry, () => setIsLoading(false))
+    query.update(updatedEntry, setIsLoading)
   }
 
   const onSubmit = (values: ISearchResultItem) => {

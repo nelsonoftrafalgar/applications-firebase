@@ -5,8 +5,8 @@ import React, { useState } from 'react'
 import { IBadResult } from 'src/models/bad'
 import { ISearchResult } from 'src/models/search'
 import { Loader } from 'src/styles/loader'
-import { database } from 'src/firebase'
 import { globalStyles } from 'src/styles/styles'
+import { query } from 'src/services/query'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -26,7 +26,7 @@ const Delete: React.FC<IProps> = ({ id, table }) => {
 
   const deleteRecord = () => {
     setIsLoading(true)
-    database.ref(`${table}/${id}`).remove(() => setIsLoading(false))
+    query.delete(`${table}/${id}`, setIsLoading)
   }
 
   return (

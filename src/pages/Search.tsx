@@ -5,7 +5,7 @@ import { Section, Title } from 'src/styles'
 
 import SearchForm from 'src/forms/SearchForm'
 import SearchResults from 'src/components/SearchResults'
-import { database } from 'src/firebase'
+import { query } from 'src/services/query'
 
 const Search = () => {
   const [searchResult, setSearchResult] = useState<ISearchResult | null>(null)
@@ -14,15 +14,7 @@ const Search = () => {
     { phrase, select }: ISearchValue,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
-    database
-      .ref('applications')
-      .orderByChild(select)
-      .startAt(phrase)
-      .endAt(phrase + '\uf8ff')
-      .on('value', (snap) => {
-        setSearchResult(snap.toJSON() as ISearchResult | null)
-        setLoading(false)
-      })
+    query.readPhrase(select, phrase, setSearchResult, setLoading)
   }
 
   return (

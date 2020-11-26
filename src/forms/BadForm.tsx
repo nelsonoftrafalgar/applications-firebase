@@ -6,8 +6,8 @@ import { Form } from 'react-final-form'
 import { IBadFormItem } from 'src/models/bad'
 import Input from 'src/components/Input'
 import { Loader } from 'src/styles/loader'
-import { database } from 'src/firebase'
 import { globalStyles } from 'src/styles/styles'
+import { query } from 'src/services/query'
 import styled from 'styled-components'
 import { validateSearch } from 'src/validation/schema'
 
@@ -22,7 +22,7 @@ const BadForm = () => {
 
   const onSubmit = (value: IBadFormItem) => {
     setIsLoading(true)
-    database.ref('bad_companies').push(value, () => setIsLoading(false))
+    query.create('bad_companies', value, setIsLoading)
   }
 
   return (

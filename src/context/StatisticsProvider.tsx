@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import { IStatistics } from 'src/models/statistiscs'
-import { database } from 'src/firebase'
+import { query } from 'src/services/query'
 
 interface IStatisticsContext {
   statistics: IStatistics | null
@@ -15,9 +15,7 @@ const StatisticsProvider: React.FC = ({ children }) => {
   const [statistics, setStatistics] = useState<IStatistics | null>(null)
 
   useEffect(() => {
-    database
-      .ref('applications')
-      .on('value', (snap) => setStatistics(snap.toJSON() as IStatistics | null))
+    query.readAll('applications', setStatistics)
   }, [])
 
   return <StatisticsContex.Provider value={{ statistics }}>{children}</StatisticsContex.Provider>

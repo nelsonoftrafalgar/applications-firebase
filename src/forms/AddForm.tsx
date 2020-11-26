@@ -7,8 +7,8 @@ import { Form } from 'react-final-form'
 import { ISearchResultItem } from 'src/models/search'
 import Input from 'src/components/Input'
 import { Loader } from 'src/styles/loader'
-import { database } from 'src/firebase'
 import { globalStyles } from 'src/styles/styles'
+import { query } from 'src/services/query'
 import styled from 'styled-components'
 
 const FormWrapper = styled.form`
@@ -22,7 +22,7 @@ const AddForm: React.FC = () => {
 
   const onSubmit = (values: ISearchResultItem) => {
     setIsLoading(true)
-    database.ref('applications').push(values, () => setIsLoading(false))
+    query.create('applications', values, setIsLoading)
   }
 
   return (
