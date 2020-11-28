@@ -36,14 +36,14 @@ const Select: React.FC<IProps> = ({ name, options, validate }) => {
 
   return (
     <>
-      <StyledSelect {...input}>
+      <StyledSelect data-testid={`${name.toUpperCase()}-SELECT`} {...input}>
         {options.map(({ label, value }) => (
           <option key={label} aria-selected={false} value={value}>
             {label}
           </option>
         ))}
       </StyledSelect>
-      <Error>{errorMessage}</Error>
+      <Error data-testid={`${name.toUpperCase()}-SELECT-ERROR`}>{errorMessage}</Error>
     </>
   )
 }

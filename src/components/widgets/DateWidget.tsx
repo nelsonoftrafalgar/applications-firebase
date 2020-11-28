@@ -1,8 +1,8 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
 
-import { BarChartComponent } from './BarChartComponent'
-import { IBarChartWidgetData } from 'src/models/statistiscs'
-import { Title } from 'src/styles'
+import { ILineChartWidgetData } from 'src/models/statistiscs'
+import { LineChartComponent } from 'src/components/charts/LineChartComponent'
+import { colors } from 'src/data/colors'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 
@@ -13,12 +13,10 @@ const Container = styled.div`
 `
 
 interface IProps {
-  data: IBarChartWidgetData[]
-  color: string
-  title: string
+  data: ILineChartWidgetData[]
 }
 
-const BarChartWidget: React.FC<IProps> = ({ data, color, title }) => {
+const DateWidget: React.FC<IProps> = ({ data }) => {
   const containerRef = useRef() as MutableRefObject<HTMLDivElement>
   const [parentWidth, setParentWidth] = useState(0)
 
@@ -29,10 +27,9 @@ const BarChartWidget: React.FC<IProps> = ({ data, color, title }) => {
 
   return (
     <Container ref={containerRef}>
-      <Title margin={'0 0 20px 0'}>{title}</Title>
-      <BarChartComponent color={color} parentWidth={parentWidth} data={data} />
+      <LineChartComponent data={data} parentWidth={parentWidth} color={colors[4]} />
     </Container>
   )
 }
 
-export { BarChartWidget }
+export default DateWidget

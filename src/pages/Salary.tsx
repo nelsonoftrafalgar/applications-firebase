@@ -1,7 +1,7 @@
 import { Col, Row } from 'src/grid'
 import { Section, Title } from 'src/styles'
 
-import { BarChartWidget } from 'src/components/BarChartWidget'
+import { BarChartWidget } from 'src/components/widgets/BarChartWidget'
 import React from 'react'
 import { colors } from 'src/data/colors'
 import { getBarChartWidgetData } from 'src/helpers/getBarChartWidgetData'

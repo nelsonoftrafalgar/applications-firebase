@@ -30,8 +30,8 @@ const Input: React.FC<IProps> = ({ type, name, validate, placeholder }) => {
 
   return (
     <>
-      <StyledInput placeholder={placeholder || name} type={type} {...input} />
-      <Error>{errorMessage}</Error>
+      <StyledInput data-testid={`${name.toUpperCase()}-INPUT`} placeholder={placeholder || name} type={type} {...input} />
+      <Error data-testid={`${name.toUpperCase()}-INPUT-ERROR`}>{errorMessage}</Error>
     </>
   )
 }

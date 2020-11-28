@@ -1,7 +1,8 @@
 module.exports = {
   modulePaths: ["<rootDir>"],
   transform: {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.svg$": "<rootDir>/svgJest.js"
   },
   setupFilesAfterEnv: [
     "@testing-library/jest-dom/extend-expect"

@@ -5,9 +5,9 @@ import { validateSearch, validateSelect } from 'src/validation/schema'
 import { Button } from 'src/styles'
 import { Form } from 'react-final-form'
 import { ISearchValue } from 'src/models/search'
-import Input from 'src/components/Input'
+import Input from 'src/components/forms/Input'
 import { Loader } from 'src/styles/loader'
-import Select from 'src/components/Select'
+import Select from 'src/components/forms/Select'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 
@@ -48,7 +48,7 @@ const SearchForm: React.FC<ISearchFormProps> = ({handleSearch}) => {
               <Select name="select" options={SELECT_OPTIONS} validate={validateSelect} />
             </Col>
             <Col size={3}>
-              <Button padding={'10px 20px'} type="submit" disabled={isLoading}>
+              <Button data-testid='SEARCH-BUTTON' padding={'10px 20px'} type="submit" disabled={isLoading}>
                 {isLoading ? <Loader /> : 'Search'}
               </Button>
             </Col>

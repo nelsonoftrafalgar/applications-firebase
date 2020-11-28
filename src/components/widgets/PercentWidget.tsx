@@ -1,7 +1,7 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
 
 import { IPercentWidgetData } from 'src/models/statistiscs'
-import { PieChartWithLegend } from 'src/components/PieChartWithLegend'
+import { PieChartWithLegend } from 'src/components/charts/PieChartWithLegend'
 import { globalStyles } from 'src/styles/styles'
 import styled from 'styled-components'
 

@@ -6,7 +6,7 @@ import { validateDate, validateSalary, validateSearch } from 'src/validation/sch
 import { Form } from 'react-final-form'
 import { IEditFormModalState } from 'src/hooks/useEditFormModal'
 import { ISearchResultItem } from 'src/models/search'
-import Input from 'src/components/Input'
+import Input from 'src/components/forms/Input'
 import { Loader } from 'src/styles/loader'
 import { ResultKey } from 'src/models/main'
 import { globalStyles } from 'src/styles/styles'

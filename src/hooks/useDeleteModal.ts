@@ -6,7 +6,6 @@ interface IState {
   id: ResultKey
 }
 export const useDeleteModal = () => {
-
   const [deleteModalState, setDeleteModalState] = useState<IState | null>(null)
 
   const handleToggleDeleteModal = (id: ResultKey, isOpen: boolean) => () => {

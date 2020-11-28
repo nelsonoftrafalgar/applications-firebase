@@ -1,14 +1,13 @@
-import { IBadFormItem, IBadResult } from 'src/models/bad'
-import React, { useEffect, useState } from 'react'
+import { ISearchResult, ISearchResultItem } from 'src/models/search'
 
-import Delete from 'src/components/Delete'
-import EditBadForm from 'src/forms/EditBadForm'
+import Delete from 'src/forms/Delete'
+import EditForm from 'src/forms/EditForm'
 import Modal from 'src/components/Modal'
-import { TableHead } from 'src/components/TableHead'
-import { TableRow } from 'src/components/TableRow'
+import React from 'react'
+import { TableHead } from 'src/components/tables/TableHead'
+import { TableRow } from 'src/components/tables/TableRow'
 import { Td } from 'src/styles'
 import { globalStyles } from 'src/styles/styles'
-import { query } from 'src/services/query'
 import styled from 'styled-components'
 import { useDeleteModal } from 'src/hooks/useDeleteModal'
 import { useEditFormModal } from 'src/hooks/useEditFormModal'
@@ -27,21 +26,29 @@ const Table = styled.table`
   border-spacing: 5px;
 `
 
-const BAD_TABLE_HEAD = ['Bad company name']
+export const SEARCH_TABLE_HEAD = [
+  'Application date',
+  'Application result',
+  'Company name',
+  'Position name',
+  'Salary max',
+  'Salary min'
+]
 
-const BadResults = () => {
-  const [results, setResults] = useState<IBadResult | null>(null)
+interface ISearchResultProps {
+  searchResult: ISearchResult | null
+}
+
+const SearchResults: React.FC<ISearchResultProps> = ({ searchResult }) => {
+  const { editFormModalState, handleToggleEditFormModal } = useEditFormModal(searchResult)
   const { deleteModalState, handleToggleDeleteModal } = useDeleteModal()
-  const { editFormModalState, handleToggleEditFormModal } = useEditFormModal(results)
 
-  useEffect(() => {
-    query.readAll('bad_companies', setResults)
-  }, [])
-
-  const renderBadResults = results
-    ? Object.entries(results).map((result) => {
+  const renderResults = searchResult
+    ? Object.entries(searchResult).map((result) => {
         const [id, values] = result
-        const keys = Object.keys(values).filter((key) => key !== 'id') as Array<keyof IBadFormItem>
+        const keys = Object.keys(values).filter((key) => key !== 'id') as Array<
+          keyof ISearchResultItem
+        >
         const data = keys.map((key) => <Td key={id + key}>{values[key]}</Td>)
         return (
           <TableRow
@@ -59,22 +66,22 @@ const BadResults = () => {
     <>
       <Container>
         <Table>
-          <TableHead data={BAD_TABLE_HEAD} />
-          <tbody>{renderBadResults}</tbody>
+          <TableHead data={SEARCH_TABLE_HEAD} />
+          <tbody>{renderResults}</tbody>
         </Table>
       </Container>
       {editFormModalState?.isOpen && (
         <Modal onClose={handleToggleEditFormModal(editFormModalState.id, false)}>
-          <EditBadForm editFormState={editFormModalState} />
+          <EditForm editFormState={editFormModalState} />
         </Modal>
       )}
       {deleteModalState?.isOpen && (
         <Modal onClose={handleToggleDeleteModal(deleteModalState.id, false)}>
-          <Delete table="bad_companies" id={deleteModalState.id} />
+          <Delete table='applications' id={deleteModalState.id} />
         </Modal>
       )}
     </>
   )
 }
 
-export default BadResults
+export default SearchResults

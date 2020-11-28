@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Section, Title } from 'src/styles'
 
 import SearchForm from 'src/forms/SearchForm'
-import SearchResults from 'src/components/SearchResults'
+import SearchResults from 'src/components/results/SearchResults'
 import { query } from 'src/services/query'
 
 const Search = () => {

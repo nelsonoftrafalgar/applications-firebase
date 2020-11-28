@@ -9,8 +9,8 @@ import {
   parseDate
 } from 'src/helpers/getLineChartWidgetData'
 
-import DatePicker from 'src/components/DatePicker'
-import DateWidget from 'src/components/DateWidget'
+import DatePicker from 'src/components/widgets/DatePicker'
+import DateWidget from 'src/components/widgets/DateWidget'
 import { useStatistics } from 'src/context/StatisticsProvider'
 
 const Date = () => {

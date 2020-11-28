@@ -1,7 +1,7 @@
 import { Col, Row } from 'src/grid'
 import { Section, Title } from 'src/styles'
 
-import { PercentWidget } from 'src/components/PercentWidget'
+import { PercentWidget } from 'src/components/widgets/PercentWidget'
 import React from 'react'
 import { getPercentWidgetData } from 'src/helpers/getPercentWidgetData'
 import { useStatistics } from 'src/context/StatisticsProvider'

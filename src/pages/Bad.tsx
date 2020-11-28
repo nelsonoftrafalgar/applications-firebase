@@ -2,7 +2,7 @@ import { Col, Row } from 'src/grid'
 import { Section, Title } from 'src/styles'
 
 import BadForm from 'src/forms/BadForm'
-import BadResults from 'src/components/BadResults'
+import BadResults from 'src/components/results/BadResults'
 import React from 'react'
 
 const Bad = () => {
