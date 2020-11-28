@@ -29,3 +29,7 @@ yarn-error.log*
 /.vscode
 
 db.json
+/.firebase
+.firebaserc
+database.rules.json
+firebase.json
